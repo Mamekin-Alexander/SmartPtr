@@ -19,6 +19,7 @@ public:
 		}
 		m_ptr = o.m_ptr;
 		o.m_ptr = nullptr;
+		return *this;
 	}
     
 	UniquePtr(T* p) {
@@ -210,10 +211,6 @@ public:
 		}
 	}
 	WeakPtr& operator=(const SharedPtr<T>& o) {
-		if (this == &o)
-		{
-			return *this;
-		}
 		Reset();
 		m_ptr = o.m_ptr;
 		m_ref_block = o.m_ref_block;
@@ -221,6 +218,7 @@ public:
 		{
 			++m_ref_block->weak;
 		}
+		return *this;
 	}
     
     // Replaces pointer with nullptr
